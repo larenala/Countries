@@ -1,6 +1,8 @@
 # Fullstack Weather app
-This project is based on Fullstack course at the University of Helsinki. It is a simple app searching for countries, showing the basic information,
-weather and time for each country. 
+The project is a simple app searching for countries, showing the basic information,
+weather and time for each country. It is based on [Fullstack course](https://fullstackopen.com/about) at the University of Helsinki. 
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Installation
 
@@ -21,9 +23,6 @@ Make sure you have node installed.
 ```npm start```
 
 The project should now open in [http://localhost:3000](http://localhost:3000)
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
 ### `npm test`
