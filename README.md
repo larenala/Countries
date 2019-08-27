@@ -1,3 +1,26 @@
+#Fullstack Weather app
+This project is based on Fullstack course at the University of Helsinki. It is a simple app searching for countries, showing the basic information,
+weather and time for each country. 
+
+## Installation
+
+Make sure you have node installed.
+
+### If you don't have node installed
+
+1. Go to [Node.js website](https://nodejs.org/en/) to find installation instructions
+
+2. Check that node and node package manager (npm)  were installed correctly by running ```node -v``` and ```npm -v```
+
+## Install dependencies
+
+``` npm install ``` 
+
+The project should open in http://localhost:3000
+
+
+## Original React Readme:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
