@@ -11,13 +11,11 @@ const Country = ( { country } ) => {
         axios
           .get("http://api.openweathermap.org/data/2.5/weather?q=" + country.name + "&APPID="+ process.env.REACT_APP_WEATHER_API_KEY)
           .then(response => {
-            console.log('response ', response.data)
               setWeather(response.data.weather[0])
               setTemp(response.data.main)
               setTimezone(response.data.timezone)
           })
     },[])
-    console.log('location ', typeof(timezone))
         return (
           <Container>
             <Grid columns={3} divided>
