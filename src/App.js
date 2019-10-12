@@ -40,7 +40,7 @@ const App = () => {
         />
         </Menu.Menu>
       </Menu>
-      <h1></h1>
+      <h1>View Countries</h1>
       <Countries 
         countriesToShow={countriesToShow} 
         handleClick={(s) => setSearchString(s)}
