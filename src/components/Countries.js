@@ -7,7 +7,7 @@ import Country from './Country'
 const Countries = (props) => {
     if (props.countriesToShow.length === 0) {
       return (
-        <div className="ui center aligned segment">
+        <div className="ui center aligned segment content-container">
           <h2>Try again!</h2>
           <p>No country name matched your search</p>
           <p>Press clear next to the search field to search again.</p>
@@ -15,8 +15,8 @@ const Countries = (props) => {
       )
     } else if (props.countriesToShow.length > 10) {
         return (
-          <div className="ui center aligned segment">
-            <div>
+          <div className="ui center aligned segment content-container">
+            <div className="text-content">
               <h2>Find countries and weather conditions</h2>
               <p>
                 Search by typing in the search bar. 

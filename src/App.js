@@ -26,8 +26,8 @@ const App = () => {
     : countries
 
   return (
-    <Container>
-      <Menu stackable>
+    <>
+    <Menu stackable>
         <Menu.Item header>Countries and Weather App </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item>
@@ -39,11 +39,13 @@ const App = () => {
         />
         </Menu.Menu>
       </Menu>
+    <Container>     
       <Countries 
         countriesToShow={countriesToShow} 
         handleClick={(s) => setSearchString(s)}
       />
     </Container>
+    </>
   )
 }
 

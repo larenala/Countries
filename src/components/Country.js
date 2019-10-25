@@ -11,7 +11,6 @@ const Country = ( { country } ) => {
     const [ coordinates, setCoordinates ] = useState([])
     const [ wind, setWind ] = useState([])
     const [ timezone, setTimezone ] = useState([]) 
-    const [ uvIndex, setUvIndex ] = useState([])
 
     useEffect(() => {
         axios
@@ -22,25 +21,29 @@ const Country = ( { country } ) => {
             setConditions(response.data.main)
             const tempCelsius = ((response.data.main.temp - 32)*5)/9
             setCelsius(Math.round(tempCelsius))
-            setTimezone(response.data.timezone)
+            const date = new Date()
+            let time = date.getTime()
+            console.log('time ', time)
+            const timenow = time + (response.data.timezone*1000)
+            console.log('time ', time)
+            const newDate = new Date(timenow)
+            console.log('newDate ', newDate)
+            const newTime = new Date(timenow).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+            })
+            console.log('new time ', newTime)
+            setTimezone(newTime)
             setCoordinates(response.data.coord)
             setWind(response.data.wind)
           })
     },[])
 
-    useEffect(() => {
-      axios
-        .get("http://api.openweathermap.org/data/2.5/uvi?appid="+ process.env.REACT_APP_WEATHER_API_KEY+"&lat=" + coordinates.lat+ "&lon="+coordinates.lon)
-        .then(response => {
-          console.log('response 2 ', response.data)
-          setUvIndex(response.data)
-        })
-    }, [])
-
         return (
           <Container>
             <Grid textAlign='center' stackable columns={3} divided>
-            <Grid.Row>
+            <Grid.Row className="content-container">
               <Grid.Column>
                 <div>
                     <h1>{country.name}</h1>  
@@ -64,19 +67,14 @@ const Country = ( { country } ) => {
                     <p className="capitalized">{weather.description}</p>
                     <p><strong>Temperature: </strong>{celsius} °C, {Math.round(conditions.temp)} °F</p>
                     <p><strong>Humidity: </strong>{conditions.humidity}%</p>
-                    <img src={"http://openweathermap.org/img/wn/" + weather.icon +"@2x.png"} alt="weather icon" width="200px"/>
+                    <img src={"http://openweathermap.org/img/wn/" + weather.icon +"@2x.png"} alt="weather icon" width="200px" className="weather-icon"/>
                   </div>
                   }
                 </div>
               </Grid.Column>
               <Grid.Column>
                <div>
-                <h2>What to wear outside</h2>
-                <div>
-                  <p>It's quite warm! Put on a t-shirt and shorts.</p>
-                  <FontAwesomeIcon icon={faMitten} />
-                </div>
-                <h2>Timezone in {country.name} is {timezone}</h2>
+                <h2>Time in {country.capital} is {timezone}</h2>
                </div>
               </Grid.Column>
             </Grid.Row>

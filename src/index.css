@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fefefe; 
+  background-color: #e9f4fcd3;
 }
 
 .capitalized {
@@ -14,6 +16,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+div.ui.center.aligned.segment.content-container,
+div.row.content-container,
+.content-container {
+  padding-bottom: 20em;
+  background-color: #fefefe;
+}
+
+div.header.item {
+  color: rgb(156, 102, 31) !important;
 }
 
 li {
@@ -29,11 +42,15 @@ li {
 }
 
 .text-content {
-
+  padding-bottom: 5em;
 }
 
 ul {
   list-style-type: none;
+}
+
+.weather-icon {
+  background: lightskyblue;
 }
 
 
