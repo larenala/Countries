@@ -29,8 +29,8 @@ jobs:
             image=gcr.io/concrete-setup-255709/laurareivinen-countries
             docker build --build-arg REACT_APP_WEATHER_API_KEY=${REACT_APP_WEATHER_API_KEY} -t ${image}:${CIRCLE_SHA1} .
             echo Authenticating...
-            gcloud auth configure-docker 
-	    docker push ${image}:${CIRCLE_SHA1}
+            gcloud auth configure-docker
+            docker push ${image}:${CIRCLE_SHA1}
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker tag ${image}:${CIRCLE_SHA1} ${image}:master
               docker push ${image}:master
