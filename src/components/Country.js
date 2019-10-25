@@ -76,6 +76,7 @@ const Country = ( { country } ) => {
                   <p>It's quite warm! Put on a t-shirt and shorts.</p>
                   <FontAwesomeIcon icon={faMitten} />
                 </div>
+                <h2>Timezone in {country.name} is {timezone}</h2>
                </div>
               </Grid.Column>
             </Grid.Row>
