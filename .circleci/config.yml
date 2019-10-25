@@ -25,14 +25,12 @@ jobs:
             echo "CIRCLE_SHA1=$CIRCLE_SHA1"
       - run:
           command: |
-            echo Authenticating...
-            echo ${WORKSHOP_CI_ACCOUNT_TOKEN_BASE64} | base64 --decode > .WORKSHOP_CI_ACCOUNT_TOKEN.json
-            gcloud auth activate-service-account ${WORKSHOP_CI_USER} --key-file=.WORKSHOP_CI_ACCOUNT_TOKEN.json >/dev/null 2>&1
-            gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://gcr.io >/dev/null 2>&1
-            set -x
-            image=gcr.io/unity-ads-workshop-test/laurareivinen-countries
+            echo Building the image...
+            image=gcr.io/concrete-setup-255709/laurareivinen-countries
             docker build --build-arg REACT_APP_WEATHER_API_KEY=${REACT_APP_WEATHER_API_KEY} -t ${image}:${CIRCLE_SHA1} .
-            docker push ${image}:${CIRCLE_SHA1}
+            echo Authenticating...
+            gcloud auth configure-docker 
+	    docker push ${image}:${CIRCLE_SHA1}
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker tag ${image}:${CIRCLE_SHA1} ${image}:master
               docker push ${image}:master
