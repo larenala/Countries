@@ -27,9 +27,8 @@ const App = () => {
 
   return (
     <Container>
-      <Menu>
-        <Menu.Item header>Search for countries </Menu.Item>
-        
+      <Menu stackable>
+        <Menu.Item header>Countries and Weather App </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item>
             <Input icon='search' placeholder='Search...' onChange={handleChange} value={searchString} />
@@ -40,7 +39,6 @@ const App = () => {
         />
         </Menu.Menu>
       </Menu>
-      <h1></h1>
       <Countries 
         countriesToShow={countriesToShow} 
         handleClick={(s) => setSearchString(s)}

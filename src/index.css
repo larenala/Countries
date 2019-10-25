@@ -7,7 +7,33 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.capitalized {
+  text-transform: capitalize;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+li {
+  text-align: center;
+}
+
+.list-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 60%;
+  text-align: center;
+}
+
+.text-content {
+
+}
+
+ul {
+  list-style-type: none;
+}
+
+
