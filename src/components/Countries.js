@@ -22,8 +22,7 @@ const Countries = (props) => {
                 Search by typing in the search bar. 
               </p>
               <p>
-                Results are only shown if there are fewer than 10 countries that match the search,
-                so keep typing!
+                Results are only shown if there are fewer than 10 countries that match the search.
               </p>
             </div>
             <div className="icon-europe">

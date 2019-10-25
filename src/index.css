@@ -27,18 +27,15 @@ div.row.content-container,
 
 div.header.item {
   color: rgb(156, 102, 31) !important;
+  font-size: 1.5em;
 }
 
-li {
-  text-align: center;
-}
 
 .list-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 60%;
-  text-align: center;
 }
 
 .text-content {

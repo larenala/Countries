@@ -10,7 +10,8 @@ const Country = ( { country } ) => {
     const [ celsius, setCelsius ] = useState(0)
     const [ coordinates, setCoordinates ] = useState([])
     const [ wind, setWind ] = useState([])
-    const [ timezone, setTimezone ] = useState([]) 
+    const [ time, setTime ] = useState([]) 
+    const [ date, setDate ] = useState('')
 
     useEffect(() => {
         axios
@@ -23,18 +24,22 @@ const Country = ( { country } ) => {
             setCelsius(Math.round(tempCelsius))
             const date = new Date()
             let time = date.getTime()
-            console.log('time ', time)
-            const timenow = time + (response.data.timezone*1000)
-            console.log('time ', time)
-            const newDate = new Date(timenow)
+            let offset = date.getTimezoneOffset()*60000
+            const gmtTime = time + offset
+            const gmtDate = new Date(gmtTime)
+            console.log('gmt Date', gmtDate)
+            console.log('timezone ', response.data.timezone)
+            const localTime = (gmtDate.getTime() + (response.data.timezone*1000))
+            const newDate = new Date(localTime)
             console.log('newDate ', newDate)
-            const newTime = new Date(timenow).toLocaleTimeString([], {
+            const newTime = newDate.toLocaleTimeString([], {
               hour: '2-digit',
               minute: '2-digit',
               hour12: false,
             })
-            console.log('new time ', newTime)
-            setTimezone(newTime)
+            const localDate = newDate.toLocaleDateString() 
+            setTime(newTime)
+            setDate(localDate)
             setCoordinates(response.data.coord)
             setWind(response.data.wind)
           })
@@ -42,15 +47,16 @@ const Country = ( { country } ) => {
 
         return (
           <Container>
+            <div className="content-container">
             <Grid textAlign='center' stackable columns={3} divided>
-            <Grid.Row className="content-container">
+            <Grid.Row>
               <Grid.Column>
                 <div>
                     <h1>{country.name}</h1>  
                     <p><strong>Capital: </strong>{country.capital}</p>
                     <p><strong>Population: </strong>{country.population.toLocaleString('en', {useGrouping:true})}</p>
                     <h2>Languages</h2>
-                    <ul>
+                    <ul list-content>
                     {country.languages.map(item => 
                         <li key={item.name}>{item.name}</li>
                     )}
@@ -74,11 +80,13 @@ const Country = ( { country } ) => {
               </Grid.Column>
               <Grid.Column>
                <div>
-                <h2>Time in {country.capital} is {timezone}</h2>
+                <h2>Time in {country.capital} is {time} </h2>
+                <p>The date is {date}.</p>
                </div>
               </Grid.Column>
             </Grid.Row>
             </Grid>
+            </div>
         </Container>
       
          

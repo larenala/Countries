@@ -9,6 +9,8 @@ const App = () => {
   const [ countries, setCountries ] = useState([])
   const [ searchString, setSearchString ] = useState('')
 
+  const textInput = React.createRef()
+
   useEffect (() =>  {
     axios
       .get("https://restcountries.eu/rest/v2/all")
@@ -21,6 +23,11 @@ const App = () => {
     setSearchString(event.target.value)
   }
 
+  const clearSearchForm = (event) => {
+    setSearchString('')
+    if(textInput) textInput.current.focus()
+  }
+
   const countriesToShow = searchString.length > 0 
     ? countries.filter(c => c.name.toLowerCase().includes(searchString.toLowerCase())) 
     : countries
@@ -31,11 +38,19 @@ const App = () => {
         <Menu.Item header>Countries and Weather App </Menu.Item>
         <Menu.Menu position='right'>
           <Menu.Item>
-            <Input icon='search' placeholder='Search...' onChange={handleChange} value={searchString} />
+            <Input 
+              id="searchField" 
+              icon='search' 
+              autoFocus 
+              placeholder='Search...' 
+              onChange={handleChange} 
+              value={searchString} 
+              ref={ textInput }
+            />
           </Menu.Item>
           <Menu.Item
           name='clear'
-          onClick={() => setSearchString('')}
+          onClick={clearSearchForm}
         />
         </Menu.Menu>
       </Menu>
