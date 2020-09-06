@@ -26,7 +26,7 @@ jobs:
       - run:
           command: |
             echo Building the image...
-            image=gcr.io/concrete-setup-255709/laurareivinen-countries
+            image=gcr.io/${PROJECT_ID}/laurareivinen-countries
             docker build --build-arg REACT_APP_WEATHER_API_KEY=${REACT_APP_WEATHER_API_KEY} -t ${image}:${CIRCLE_SHA1} .
             echo Authenticating...
             gcloud auth configure-docker
@@ -47,9 +47,8 @@ jobs:
       - run:
           command: |
             echo Authenticating...
-            echo ${WORKSHOP_CI_ACCOUNT_TOKEN_BASE64} | base64 --decode > .WORKSHOP_CI_ACCOUNT_TOKEN.json
-            gcloud auth activate-service-account ${WORKSHOP_CI_USER} --key-file=.WORKSHOP_CI_ACCOUNT_TOKEN.json >/dev/null 2>&1
-            set -x
+            gcloud auth configure-docker
+            gloud config set project ${PROJECT_ID}
             gcloud container clusters get-credentials ${WORKSHOP_CLUSTER} --zone ${WORKSHOP_CLUSTER_ZONE} --project ${WORKSHOP_GCP_PROJECT}
             kubectl config current-context
             service=laurareivinen-countries
